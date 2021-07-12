@@ -1,0 +1,19 @@
+<html lang="ru">
+    
+	<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}------{% endblock %}</title>
+    </head>
+  
+    <body>
+        <h1>Hello, blog!</h1>
+		<h2>Nick has written {{ blogs.count }} blog{{ blogs.count|pluralize }}</h2>
+		{% for blog in blogs %}
+		    <a href="{% url 'blog:detail' blog.id %}"><h2>{{ blog.title }}</h2></a>
+			<h5>{{ blog.date|date:'d.m.Y'|upper }}</h5>
+			<p>{{ blog.description|safe|truncatechars:100 }}</p>
+		{% endfor %}
+    </body>
+</html>

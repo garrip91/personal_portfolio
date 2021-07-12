@@ -1,23 +1,22 @@
-<html lang="ru">
-    
-	<head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %}Nick's Portfolio{% endblock %}</title>
-    </head>
-  
-    <body>
-        <h1>Nick's Portfolio</h1>
-		{% for project in projects %}
-		    <p>
-			    {{ project.title }}<br>
-			    {{ project.description }}<br>
-				<img src="{{ project.image.url }}" height=500 width=700><br>
-				{% if project.url %}
-				    <a href="{{ project.url }}">Link</a>
-				{% endif %}
-			</p>
-		{% endfor %}
-    </body>
-</html>
+{% extends 'portfolio/base.html' %}
+
+
+{% block content %}
+    <h1>Nick's Portfolio</h1>
+	{% load static %}
+	<a href="{% url 'blog:all_blogs' %}">Blog</a>
+	<br>
+	<a href="{% static 'portfolio/resume.pdf' %}">Resume</a>
+	<br>
+	<img src="{% static 'portfolio/SquareBlonde.jpg' %}">
+	{% for project in projects %}
+	    <p>
+		    {{ project.title }}<br>
+		    {{ project.description }}<br>
+			<img src="{{ project.image.url }}" height=500 width=700><br>
+			{% if project.url %}
+			    <a href="{{ project.url }}">Link</a>
+			{% endif %}
+		</p>
+	{% endfor %}
+{% endblock %}
